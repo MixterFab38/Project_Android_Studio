@@ -4,8 +4,11 @@
     package="fr.mmi.rodet.project_android_studio">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.flash" />
 
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
 
     <application
@@ -27,9 +30,5 @@
 
 
     </application>
-
-
-
-
 
 </manifest>

@@ -36,22 +36,20 @@
         android:text="TextView"
         android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:id="@+id/flash"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#000"/>
 
-    <TextView
-        android:id="@+id/barreEtat"
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="#333" />
+    <ImageButton
 
+        android:layout_gravity="center"
+
+        android:id="@+id/button_on_off"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:background="#000"
+
+        android:src="@mipmap/ic_launcher"/>
 
 
 </android.support.constraint.ConstraintLayout>
