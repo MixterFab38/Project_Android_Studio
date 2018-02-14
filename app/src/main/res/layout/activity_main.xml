@@ -7,21 +7,23 @@
     tools:context="fr.mmi.rodet.project_android_studio.MainActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonFlash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="148dp"
         android:layout_marginTop="300dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="148dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/blanc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="126dp" />
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="126dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
