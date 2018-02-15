@@ -9,10 +9,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -25,20 +25,22 @@ public class MainActivity extends Activity
     private CameraManager mCameraManager;
     private String mCameraId;
     private ImageButton mTorchOnOffButton;
+    private ImageButton mTorchOnOffButton2;
     private Float i;
+    private Boolean isTorchOn;
 
 
 
     @SuppressLint("WrongViewCast")
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // flash light
         Log.d("FlashLightActivity", "onCreate()");
         mTorchOnOffButton = (ImageButton) findViewById(R.id.button_on_off);
+        mTorchOnOffButton2 = (ImageButton) findViewById(R.id.imageButton);
         Boolean isFlashAvailable = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
         mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
 
@@ -47,52 +49,41 @@ public class MainActivity extends Activity
         SensorManager mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor LightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         mySensorManager.registerListener(LightSensorListener, LightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        isTorchOn = false;
 
-        try
-        {
+        try {
             mCameraId = mCameraManager.getCameraIdList()[0];
 
-        } catch (CameraAccessException e)
-        {
+        } catch (CameraAccessException e) {
             e.printStackTrace();
         }
 
 
-        Thread t = new Thread() {
 
-            @Override
-            public void run() {
+        mTorchOnOffButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
                 try {
-                    while (!isInterrupted()) {
-                        Thread.sleep(1000);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try
-                                {
-                                    if(i<= 160)
-                                    {
-                                        mCameraManager.setTorchMode(mCameraId, true);
-                                    }
-                                    else
-                                    {
-                                        mCameraManager.setTorchMode(mCameraId, false);
-                                    }
-                                } catch (Exception e)
-                                {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+
+                    if (isTorchOn)
+                    {
+                        mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
+                        Update();
+                        isTorchOn = false;
+                    }
+                    else
+                    {
+                        mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_foreground);
+                        isTorchOn = true;
                     }
                 }
-                catch (InterruptedException e)
+                catch (Exception e)
                 {
+                    e.printStackTrace();
                 }
-            }
-        };
 
-        t.start();
+            }
+        });
     }
 
 
@@ -117,24 +108,59 @@ public class MainActivity extends Activity
         }
     };
 
-    // flash light
-    public void turnOnFlashLight()
+    public void Update()
     {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
-            }
-    }
+        Thread t = new Thread()
+        {
 
-    // flash light
-    public void turnOffFlashLight()
-    {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            @Override
+            public void run()
             {
-                mTorchOnOffButton.setImageResource(R.mipmap.ic_launcher);
-            }
-    }
+                try
+                {
+                    while (!isInterrupted())
+                    {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                try
+                                {
+                                    if(isTorchOn == true)
+                                    {
+                                        if(i<= 160)
+                                        {
+                                            mCameraManager.setTorchMode(mCameraId, true);
+                                        }
+                                        else
+                                        {
+                                            mCameraManager.setTorchMode(mCameraId, false);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        mCameraManager.setTorchMode(mCameraId, false);
+                                    }
 
+                                } catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        t.start();
+    }
 
 }
 
