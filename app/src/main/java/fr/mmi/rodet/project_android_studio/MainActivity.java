@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
-                textLIGHT_reading.setText("LIGHT: " + event.values[0]);
+                textLIGHT_reading.setText("Luminosité : " + event.values[0] + "Lx");
             }
         }
 

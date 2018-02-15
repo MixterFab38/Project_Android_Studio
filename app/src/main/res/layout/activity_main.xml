@@ -11,19 +11,24 @@
         android:id="@+id/LIGHT_available"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
         android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="176dp" />
+        app:layout_constraintVertical_bias="0.343" />
 
     <TextView
         android:id="@+id/LIGHT_reading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="176dp" />
+        app:layout_constraintVertical_bias="0.225" />
 
     <TextView
         android:id="@+id/textView1"
@@ -32,14 +37,12 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
 
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="500px"
-        android:text="TextView"
-        android:layout_gravity="center_horizontal" />
+        android:text="TextView" />
 
 
     <ImageButton
-
-        android:layout_gravity="center"
 
         android:id="@+id/button_on_off"
 
@@ -47,9 +50,27 @@
 
         android:layout_height="wrap_content"
 
+        android:layout_gravity="center"
+
         android:background="#000"
 
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.845" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="309dp"
+        android:layout_height="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521" />
 
 
 </android.support.constraint.ConstraintLayout>
