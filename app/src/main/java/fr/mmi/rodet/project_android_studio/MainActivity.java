@@ -1,7 +1,5 @@
 package fr.mmi.rodet.project_android_studio;
 
-
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,47 +15,53 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
-
-public class MainActivity extends Activity {
-
+public class MainActivity extends Activity
+{
+    // Sensor light
     TextView textLIGHT_available, textLIGHT_reading;
 
-
+    // flash light
     private CameraManager mCameraManager;
     private String mCameraId;
     private ImageButton mTorchOnOffButton;
     private Boolean isTorchOn;
     private MediaPlayer mp;
+    private Float i;
 
 
 
     @SuppressLint("WrongViewCast")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // flash light
         Log.d("FlashLightActivity", "onCreate()");
         mTorchOnOffButton = (ImageButton) findViewById(R.id.button_on_off);
         isTorchOn = false;
         Boolean isFlashAvailable = getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
-        if (!isFlashAvailable) {
+        if (!isFlashAvailable)
+        {
 
             AlertDialog alert = new AlertDialog.Builder(MainActivity.this)
                     .create();
             alert.setTitle("Error !!");
             alert.setMessage("Your device doesn't support flash light!");
             alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
+                    new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which)
+                        {
                             // closing the application
                             finish();
                             System.exit(0);
@@ -68,99 +72,163 @@ public class MainActivity extends Activity {
         }
 
         mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        try {
+
+        try
+        {
             mCameraId = mCameraManager.getCameraIdList()[0];
-        } catch (CameraAccessException e) {
+
+
+
+        } catch (CameraAccessException e)
+        {
             e.printStackTrace();
         }
 
-        mTorchOnOffButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+
+
+
+        Thread t = new Thread() {
+
             @Override
-            public void onClick(View v) {
+            public void run() {
                 try {
-                    if (isTorchOn) {
-                        turnOffFlashLight();
-                        isTorchOn = false;
-                    } else {
-                        turnOnFlashLight();
-                        isTorchOn = true;
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try
+                                {
+
+
+                                    if(i<= 160)
+                                    {
+                                        mCameraManager.setTorchMode(mCameraId, true);
+
+                                    }
+                                    else
+                                    {
+                                        mCameraManager.setTorchMode(mCameraId, false);
+                                    }
+
+
+                                } catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (InterruptedException e) {
                 }
             }
-        });
+        };
+
+        t.start();
 
 
 
 
 
+
+
+
+        // Sensor light
         textLIGHT_available
                 = (TextView) findViewById(R.id.LIGHT_available);
         textLIGHT_reading
                 = (TextView) findViewById(R.id.LIGHT_reading);
-
         SensorManager mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
         Sensor LightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        if (LightSensor != null) {
-            textLIGHT_available.setText("Sensor.TYPE_LIGHT Available");
+
+
+
+
+        if (LightSensor != null)
+        {
+
+            textLIGHT_available.setText("Sensor.TYPE_LIGHT NOT Available");
             mySensorManager.registerListener(
                     LightSensorListener,
                     LightSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
-
         }
         else
-            {
+        {
             textLIGHT_available.setText("Sensor.TYPE_LIGHT NOT Available");
         }
+
+
     }
 
 
 
-
-    private final SensorEventListener LightSensorListener = new SensorEventListener() {
+    // Sensor light
+    private final SensorEventListener LightSensorListener = new SensorEventListener()
+    {
 
         @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            // TODO Auto-generated method stub
+        public void onAccuracyChanged(Sensor sensor, int accuracy)
+        {
+
 
         }
 
         @Override
-        public void onSensorChanged(SensorEvent event) {
+        public void onSensorChanged(SensorEvent event)
+        {
             if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 textLIGHT_reading.setText("LIGHT: " + event.values[0]);
+                i = event.values[0];
             }
         }
-
     };
 
-    public void turnOnFlashLight() {
+    // flash light
+    public void turnOnFlashLight()
+    {
 
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mCameraManager.setTorchMode(mCameraId, true);
+        try
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
 
                 mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
+
+
+
+
+
+
+
+
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void turnOffFlashLight() {
+    // flash light
+    public void turnOffFlashLight()
+    {
 
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mCameraManager.setTorchMode(mCameraId, false);
+        try
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
 
                 mTorchOnOffButton.setImageResource(R.mipmap.ic_launcher);
-
+                mCameraManager.setTorchMode(mCameraId, false);
             }
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
