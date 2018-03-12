@@ -3,6 +3,7 @@ package fr.mmi.rodet.project_android_studio;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -14,7 +15,11 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity
 {
@@ -29,6 +34,14 @@ public class MainActivity extends Activity
     private Float i;
     private Boolean isTorchOn;
 
+    // Proximyty
+    /*SensorManager mySensorManager;
+    Sensor myProximitySensor;
+    TextView ProximitySensor;
+    TextView ProximityMax;
+    TextView ProximityReading;*/
+
+
 
 
     @SuppressLint("WrongViewCast")
@@ -37,10 +50,31 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Proximity
+       /* ProximitySensor = (TextView)findViewById(R.id.proximitySensor);
+        ProximityMax = (TextView)findViewById(R.id.proximityMax);
+        ProximityReading = (TextView)findViewById(R.id.proximityReading);
+
+        mySensorManager = (SensorManager)getSystemService(
+                Context.SENSOR_SERVICE);
+        myProximitySensor = mySensorManager.getDefaultSensor(
+                Sensor.TYPE_PROXIMITY);
+
+        if (myProximitySensor == null){
+            ProximitySensor.setText("No Proximity Sensor!");
+        }else{
+            ProximitySensor.setText(myProximitySensor.getName());
+            ProximityMax.setText("Maximum Range: "
+                    + String.valueOf(myProximitySensor.getMaximumRange()));
+            mySensorManager.registerListener(proximitySensorEventListener,
+                    myProximitySensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }*/
+
+
         // flash light
         Log.d("FlashLightActivity", "onCreate()");
         mTorchOnOffButton = (ImageButton) findViewById(R.id.button_on_off);
-        mTorchOnOffButton2 = (ImageButton) findViewById(R.id.imageButton);
         Boolean isFlashAvailable = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
         mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
 
@@ -58,32 +92,41 @@ public class MainActivity extends Activity
             e.printStackTrace();
         }
 
-
-
-        mTorchOnOffButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                try {
-
-                    if (isTorchOn)
-                    {
-                        mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
-                        Update();
-                        isTorchOn = false;
-                    }
-                    else
-                    {
-                        mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_foreground);
-                        isTorchOn = true;
-                    }
-                }
-                catch (Exception e)
+        if(getResources().getDisplayMetrics().widthPixels>getResources().getDisplayMetrics().heightPixels) {
+            mTorchOnOffButton.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick(View v)
                 {
-                    e.printStackTrace();
+
+                    try
+                    {
+
+                        if (isTorchOn)
+                        {
+                            mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
+                            Update();
+                            isTorchOn = false;
+                        } else
+                            {
+                            mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_foreground);
+                            isTorchOn = true;
+                        }
+
+                    }
+                    catch (Exception e)
+
+                    {
+                        e .printStackTrace();
+                    }
                 }
 
-            }
-        });
+
+            });
+        }
+        else
+        {
+            textLIGHT_reading.setText("255");
+        }
     }
 
 
@@ -162,6 +205,28 @@ public class MainActivity extends Activity
         t.start();
     }
 
+    /*SensorEventListener proximitySensorEventListener
+            = new SensorEventListener()
+    {
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy)
+        {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event)
+        {
+            // TODO Auto-generated method stub
+
+            if(event.sensor.getType()==Sensor.TYPE_PROXIMITY)
+            {
+                ProximityReading.setText("Proximity Sensor Reading:"
+                        + String.valueOf(event.values[0]));
+            }
+        }
+     };*/
 }
 
 
