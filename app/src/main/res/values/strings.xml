@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Project_Android_Studio</string>
+    <string name="title_activity_hello_google_map">HelloGoogleMapActivity</string>
+    <string name="mapKey">AIzaSyCDsx1-H84KVVJsVhXYb8ixW_eKldXdsOY</string>
 </resources>

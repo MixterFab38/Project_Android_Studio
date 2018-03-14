@@ -11,6 +11,9 @@
     <uses-feature android:name="android.hardware.sensor.proximity" android:required="true" />
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:debuggable="true"
         android:allowBackup="true"
@@ -20,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
+
+        <uses-library android:name="com.google.android.maps" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
