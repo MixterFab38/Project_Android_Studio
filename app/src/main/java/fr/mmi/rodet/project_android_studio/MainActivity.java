@@ -2,6 +2,7 @@ package fr.mmi.rodet.project_android_studio;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -227,8 +228,9 @@ public class MainActivity extends Activity
             }
         }
      };*/
+
+    public void Page12 (View view)
+    {
+        startActivity(new Intent(this, Page_Parametre.class));
+    }
 }
-
-
-
-
