@@ -12,7 +12,6 @@
         android:id="@+id/LIGHT_reading"
         android:layout_width="344dp"
         android:layout_height="55dp"
-        android:layout_marginTop="68dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -53,26 +52,52 @@
         android:id="@+id/listView"
         android:layout_width="284dp"
         android:layout_height="114dp"
-        android:layout_marginBottom="97dp"
-        android:layout_marginTop="90dp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_on_off"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LIGHT_reading"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintHorizontal_bias="0.61"
+        app:layout_constraintStart_toStartOf="parent">
 
     </ListView>
 
-    <Button
-        android:id="@+id/Parametre"
-        android:layout_width="153dp"
-        android:layout_height="51dp"
+    <TextView
+        android:id="@+id/tvLatitude"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="Page12"
-        android:text="Parametre"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="134dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvLongitude"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvLatitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LIGHT_reading" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLatitude" />
 
 
 </android.support.constraint.ConstraintLayout>
