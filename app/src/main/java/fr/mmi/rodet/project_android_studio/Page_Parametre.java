@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,6 +19,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -27,7 +29,15 @@ import java.util.ArrayList;
  * Created by grassetk on 20/03/2018.
  */
 
-public class Page_Parametre extends Activity implements LocationListener{
+public class
+
+
+Page_Parametre extends Activity implements LocationListener{
+
+    EditText editTextLatitude;
+    EditText editTextLongitude;
+
+
 
 
     final String TAG = "GPS";
@@ -35,7 +45,7 @@ public class Page_Parametre extends Activity implements LocationListener{
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
 
-    TextView tvLatitude, tvLongitude, tvTime;
+    TextView tvLatitude, tvLongitude;
     LocationManager locationManager;
     Location loc;
     ArrayList<String> permissions = new ArrayList<>();
@@ -49,11 +59,33 @@ public class Page_Parametre extends Activity implements LocationListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametre);
 
+        Intent intent = getIntent();
+        if (intent != null){
+            String str = "";
+            String str2 = "";
+            if (intent.hasExtra("edittext3")){ // vérifie qu'une valeur est associée à la clé “edittext”
+                str = intent.getStringExtra("edittext3"); // on récupère la valeur associée à la clé
+            }
+
+            if (intent.hasExtra("edittext4")){ // vérifie qu'une valeur est associée à la clé “edittext”
+                str2 = intent.getStringExtra("edittext4"); // on récupère la valeur associée à la clé
+            }
+
+            EditText textView = (EditText) findViewById(R.id.editTextLatitude);
+            EditText textView2 = (EditText) findViewById(R.id.editTextLongitude);
+            textView.setText(str);
+            textView2.setText(str2);
+        }
+
+
+
+        editTextLatitude = (EditText) findViewById(R.id.editTextLatitude);
+        editTextLongitude = (EditText) findViewById(R.id.editTextLongitude);
 
 
         tvLatitude = (TextView) findViewById(R.id.tvLatitude);
         tvLongitude = (TextView) findViewById(R.id.tvLongitude);
-        tvTime = (TextView) findViewById(R.id.tvTime);
+
 
         locationManager = (LocationManager) getSystemService(Service.LOCATION_SERVICE);
         isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -230,7 +262,6 @@ public class Page_Parametre extends Activity implements LocationListener{
         Log.d(TAG, "updateUI");
         tvLatitude.setText(Double.toString(loc.getLatitude()));
         tvLongitude.setText(Double.toString(loc.getLongitude()));
-        tvTime.setText(DateFormat.getTimeInstance().format(loc.getTime()));
     }
 
     @Override
@@ -268,6 +299,17 @@ public class Page_Parametre extends Activity implements LocationListener{
 
     public void Valider (View view)
     {
-        startActivity(new Intent(this, MainActivity.class));
+
+        String str = editTextLatitude.getText().toString();
+        String str2 = editTextLongitude.getText().toString();
+        String str3 = tvLatitude.getText().toString();
+        String str4 = tvLongitude.getText().toString();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("edittext", str);
+        intent.putExtra("edittext2", str2);
+        intent.putExtra("Latitude", str3);
+        intent.putExtra("Longitude", str4);
+        startActivity(intent);
     }
 }

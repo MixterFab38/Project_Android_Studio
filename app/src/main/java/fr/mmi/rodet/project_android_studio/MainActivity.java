@@ -27,6 +27,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Checkable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +40,11 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity
 {
+
+    TextView tv1;
+    TextView tv2;
+    TextView Latitude;
+    TextView Longitude;
 
     // Sensor light
     TextView textLIGHT_reading;
@@ -70,6 +76,43 @@ public class MainActivity extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tv1 = (TextView)findViewById(R.id.tv1);
+        tv2 = (TextView)findViewById(R.id.tv2);
+        Latitude = (TextView)findViewById(R.id.Latitude);
+        Longitude = (TextView)findViewById(R.id.Longitude);
+
+        Intent intent = getIntent();
+        if (intent != null){
+            String str = "";
+            String str2 = "";
+            String str3 = "";
+            String str4 = "";
+            if (intent.hasExtra("edittext")){ // vérifie qu'une valeur est associée à la clé “edittext”
+                str = intent.getStringExtra("edittext"); // on récupère la valeur associée à la clé
+            }
+
+            if (intent.hasExtra("edittext2")){ // vérifie qu'une valeur est associée à la clé “edittext”
+                str2 = intent.getStringExtra("edittext2"); // on récupère la valeur associée à la clé
+            }
+
+            if (intent.hasExtra("Latitude")){ // vérifie qu'une valeur est associée à la clé “edittext”
+                str3 = intent.getStringExtra("Latitude"); // on récupère la valeur associée à la clé
+            }
+
+            if (intent.hasExtra("Longitude")){ // vérifie qu'une valeur est associée à la clé “edittext”
+                str4 = intent.getStringExtra("Longitude"); // on récupère la valeur associée à la clé
+            }
+
+            TextView textView = (TextView) findViewById(R.id.tv1);
+            TextView textView2 = (TextView) findViewById(R.id.tv2);
+            TextView textView3 = (TextView) findViewById(R.id.Latitude);
+            TextView textView4 = (TextView) findViewById(R.id.Longitude);
+            textView.setText(str);
+            textView2.setText(str2);
+            textView3.setText(str3);
+            textView4.setText(str4);
+        }
 
 
         // Proximity
@@ -123,7 +166,7 @@ public class MainActivity extends Activity
                     try
                     {
 
-                        if (isTorchOn)
+                        if (isTorchOn && Latitude.getText() != tv1.getText() && Longitude.getText() != tv2.getText())
                         {
                             mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
                             Update();
@@ -254,7 +297,36 @@ public class MainActivity extends Activity
 
     public void Param (View view)
     {
-        startActivity(new Intent(this, Page_Parametre.class));
+        String str = tv1.getText().toString();
+        String str2 = tv2.getText().toString();
+        Intent intent = new Intent(this, Page_Parametre.class);
+        intent.putExtra("edittext3", str);
+        intent.putExtra("edittext4", str2);
+        startActivity(intent);
+    }
+
+    public boolean CheckLatitude()
+    {
+        if(Latitude.getText() == tv1.getText())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean CheckLongitude()
+    {
+        if(Longitude.getText() == tv1.getText())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

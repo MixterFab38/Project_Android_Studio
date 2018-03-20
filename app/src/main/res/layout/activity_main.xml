@@ -8,6 +8,43 @@
     tools:layout_editor_absoluteY="81dp">
 
 
+    <TextView
+        android:id="@+id/Longitude"
+        android:layout_width="77dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:text="Longitude"
+        app:layout_constraintTop_toBottomOf="@+id/tv1"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/Latitude"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="8dp"
+        android:text="Latitude"
+        app:layout_constraintTop_toBottomOf="@+id/tv2"
+        tools:layout_editor_absoluteX="133dp" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="tv2"
+        app:layout_constraintEnd_toStartOf="@+id/parametre"
+        app:layout_constraintStart_toEndOf="@+id/tv1"
+        tools:layout_editor_absoluteY="4dp" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:text="tv1"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <Button
         android:id="@+id/parametre"
         android:layout_width="wrap_content"
