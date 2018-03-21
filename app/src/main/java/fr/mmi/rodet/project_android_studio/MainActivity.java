@@ -86,20 +86,20 @@ public class MainActivity extends Activity
             String str2 = "";
             String str3 = "";
             String str4 = "";
-            if (intent.hasExtra("edittext")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                str = intent.getStringExtra("edittext"); // on récupère la valeur associée à la clé
+            if (intent.hasExtra("edittext")){
+                str = intent.getStringExtra("edittext");
             }
 
-            if (intent.hasExtra("edittext2")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                str2 = intent.getStringExtra("edittext2"); // on récupère la valeur associée à la clé
+            if (intent.hasExtra("edittext2")){
+                str2 = intent.getStringExtra("edittext2");
             }
 
-            if (intent.hasExtra("Latitude")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                str3 = intent.getStringExtra("Latitude"); // on récupère la valeur associée à la clé
+            if (intent.hasExtra("Latitude")){
+                str3 = intent.getStringExtra("Latitude");
             }
 
-            if (intent.hasExtra("Longitude")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                str4 = intent.getStringExtra("Longitude"); // on récupère la valeur associée à la clé
+            if (intent.hasExtra("Longitude")){
+                str4 = intent.getStringExtra("Longitude");
             }
 
             TextView textView = (TextView) findViewById(R.id.tv1);

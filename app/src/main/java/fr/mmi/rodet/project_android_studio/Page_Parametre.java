@@ -63,12 +63,12 @@ Page_Parametre extends Activity implements LocationListener{
         if (intent != null){
             String str = "";
             String str2 = "";
-            if (intent.hasExtra("edittext3")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                str = intent.getStringExtra("edittext3"); // on récupère la valeur associée à la clé
+            if (intent.hasExtra("edittext3")){
+                str = intent.getStringExtra("edittext3");
             }
 
-            if (intent.hasExtra("edittext4")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                str2 = intent.getStringExtra("edittext4"); // on récupère la valeur associée à la clé
+            if (intent.hasExtra("edittext4")){
+                str2 = intent.getStringExtra("edittext4");
             }
 
             EditText textView = (EditText) findViewById(R.id.editTextLatitude);
