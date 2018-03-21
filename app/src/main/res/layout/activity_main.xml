@@ -8,6 +8,20 @@
     tools:layout_editor_absoluteY="81dp">
 
 
+    <ImageButton
+        android:id="@+id/button_on_off"
+        android:layout_width="137dp"
+        android:layout_height="127dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@android:drawable/ic_lock_power_off"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LIGHT_reading" />
+
     <TextView
         android:id="@+id/Longitude"
         android:layout_width="77dp"
@@ -21,10 +35,13 @@
         android:id="@+id/Latitude"
         android:layout_width="83dp"
         android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Latitude"
-        app:layout_constraintTop_toBottomOf="@+id/tv2"
-        tools:layout_editor_absoluteX="133dp" />
+        app:layout_constraintEnd_toStartOf="@+id/parametre"
+        app:layout_constraintStart_toEndOf="@+id/Longitude"
+        app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
     <TextView
         android:id="@+id/tv2"
@@ -68,22 +85,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/parametre" />
 
-    <ImageButton
 
-        android:id="@+id/button_on_off"
-
-        android:layout_width="72dp"
-
-        android:layout_height="72dp"
-
-        android:layout_gravity="center"
-
-        android:layout_marginBottom="36dp"
-        android:background="#000"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

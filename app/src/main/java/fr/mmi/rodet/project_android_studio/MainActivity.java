@@ -53,7 +53,6 @@ public class MainActivity extends Activity
     private CameraManager mCameraManager;
     private String mCameraId;
     private ImageButton mTorchOnOffButton;
-    private ImageButton mTorchOnOffButton2;
     private Float i;
     private Boolean isTorchOn;
 
@@ -65,11 +64,6 @@ public class MainActivity extends Activity
     TextView ProximityReading;*/
 
 
-
-
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongViewCast")
     @Override
@@ -77,6 +71,8 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //PERMET DE PASSER LES VALEUR ENTRE PAGES
         tv1 = (TextView)findViewById(R.id.tv1);
         tv2 = (TextView)findViewById(R.id.tv2);
         Latitude = (TextView)findViewById(R.id.Latitude);
@@ -157,6 +153,8 @@ public class MainActivity extends Activity
             e.printStackTrace();
         }
 
+
+        //VERIFIER SI LA TORCHE EST PRESENTE ET CHANGE L'IMAGE
         if(getResources().getDisplayMetrics().widthPixels>getResources().getDisplayMetrics().heightPixels) {
             mTorchOnOffButton.setOnClickListener(new View.OnClickListener()
             {
@@ -166,14 +164,14 @@ public class MainActivity extends Activity
                     try
                     {
 
-                        if (isTorchOn && Latitude.getText() != tv1.getText() && Longitude.getText() != tv2.getText())
+                        if (isTorchOn)
                         {
-                            mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_background);
+                            mTorchOnOffButton.setBackgroundColor(Color.RED);
                             Update();
                             isTorchOn = false;
                         } else
                             {
-                            mTorchOnOffButton.setImageResource(R.drawable.ic_launcher_foreground);
+                                mTorchOnOffButton.setBackgroundColor(Color.GREEN);
                             isTorchOn = true;
                         }
 
@@ -217,6 +215,7 @@ public class MainActivity extends Activity
         }
     };
 
+    //Update pour verifier les coordonner et la luminosité
     public void Update()
     {
         Thread t = new Thread()
@@ -238,11 +237,18 @@ public class MainActivity extends Activity
                             {
                                 try
                                 {
-                                    if(isTorchOn == true)
+                                    if (!Latitude.getText().toString().equals(tv1.getText().toString()) && !Longitude.getText().toString().equals(tv2.getText().toString()))
                                     {
-                                        if(i<= 160)
+                                        if(isTorchOn == true)
                                         {
-                                            mCameraManager.setTorchMode(mCameraId, true);
+                                            if(i<= 160)
+                                            {
+                                                mCameraManager.setTorchMode(mCameraId, true);
+                                            }
+                                            else
+                                            {
+                                                mCameraManager.setTorchMode(mCameraId, false);
+                                            }
                                         }
                                         else
                                         {
@@ -253,6 +259,7 @@ public class MainActivity extends Activity
                                     {
                                         mCameraManager.setTorchMode(mCameraId, false);
                                     }
+
 
                                 } catch (Exception e)
                                 {
@@ -304,29 +311,4 @@ public class MainActivity extends Activity
         intent.putExtra("edittext4", str2);
         startActivity(intent);
     }
-
-    public boolean CheckLatitude()
-    {
-        if(Latitude.getText() == tv1.getText())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public boolean CheckLongitude()
-    {
-        if(Longitude.getText() == tv1.getText())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
 }
