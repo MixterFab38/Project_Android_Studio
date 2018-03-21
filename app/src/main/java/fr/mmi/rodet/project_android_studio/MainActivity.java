@@ -72,6 +72,8 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
 
 
+
+
         //PERMET DE PASSER LES VALEUR ENTRE PAGES
         tv1 = (TextView)findViewById(R.id.tv1);
         tv2 = (TextView)findViewById(R.id.tv2);

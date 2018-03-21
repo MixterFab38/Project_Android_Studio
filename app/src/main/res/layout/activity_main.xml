@@ -29,6 +29,7 @@
         android:layout_marginTop="8dp"
         android:text="Longitude"
         app:layout_constraintTop_toBottomOf="@+id/tv1"
+        android:visibility="invisible"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
@@ -39,6 +40,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Latitude"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/parametre"
         app:layout_constraintStart_toEndOf="@+id/Longitude"
         app:layout_constraintTop_toBottomOf="@+id/tv2" />
@@ -50,6 +52,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="tv2"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/parametre"
         app:layout_constraintStart_toEndOf="@+id/tv1"
         tools:layout_editor_absoluteY="4dp" />
@@ -59,6 +62,7 @@
         android:layout_width="80dp"
         android:layout_height="35dp"
         android:text="tv1"
+        android:visibility="invisible"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
